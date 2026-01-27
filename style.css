@@ -1,0 +1,5 @@
+/* 透明背景效果範例 */
+.card {
+    background: transparent;
+    backdrop-filter: blur(10px);
+}
