@@ -221,28 +221,32 @@ export async function getForecastRenderData(city) {
   try {
     const raw = await fetchCWA("F-D0047-091", { locationName: city });
 
-    const loc = pickForecastLocation(raw, city);
+    // ✅ 091 實際路徑：records.Locations[0].Location
+    const loc =
+      raw?.records?.Locations?.[0]?.Location?.find((l) => l.LocationName === city);
+
     if (!loc) throw new Error("city not found");
 
-    const we = loc.weatherElement ?? [];
+    const we = loc.WeatherElement ?? [];
 
-    const wxEl = findElByNames(we, ["Wx"]);
-    const maxTEl = findElByNames(we, ["MaxT"]);
-    const minTEl = findElByNames(we, ["MinT"]);
-    const popEl = findElByNames(we, ["PoP12h", "PoP", "PoP6h"]);
-    const wsEl = findElByNames(we, ["WS", "WindSpeed"]);
+    // ✅ 091 實際 ElementName（中文）
+    const wxEl = we.find((e) => e.ElementName === "天氣現象");
+    const maxTEl = we.find((e) => e.ElementName === "最高溫度");
+    const minTEl = we.find((e) => e.ElementName === "最低溫度");
+    const popEl = we.find((e) => e.ElementName === "降雨機率");
+    const wsEl  = we.find((e) => e.ElementName === "風速"); // WindSpeed :contentReference[oaicite:2]{index=2}
 
-    if (!wxEl?.time?.length) throw new Error("Wx missing");
+    if (!wxEl?.Time?.length) throw new Error("Wx missing");
 
     // 用 Wx 建立每日 bucket
     const days = new Map();
 
-    for (const t of wxEl.time) {
-      const dk = dateKey(t.startTime);
+    for (const t of wxEl.Time) {
+      const dk = dateKey(t.StartTime);
       if (!days.has(dk)) {
         days.set(dk, {
-          weekday: weekdayZh(t.startTime),
-          md: mdLabel(t.startTime),
+          weekday: weekdayZh(t.StartTime),
+          md: mdLabel(t.StartTime),
           wxList: [],
           maxList: [],
           minList: [],
@@ -250,25 +254,26 @@ export async function getForecastRenderData(city) {
           wsList: [],
         });
       }
-      days.get(dk).wxList.push(pickValue(t));
+      const wxText = t.ElementValue?.[0]?.Weather ?? "";
+      days.get(dk).wxList.push(wxText);
     }
 
     // 把數值型資料灌進每日 bucket
-    function collect(el, listName) {
-      if (!el?.time?.length) return;
-      for (const t of el.time) {
-        const dk = dateKey(t.startTime);
+    function collect(el, listName, valueKey) {
+      if (!el?.Time?.length) return;
+      for (const t of el.Time) {
+        const dk = dateKey(t.StartTime);
         if (!days.has(dk)) continue;
-        const v = safeNum(pickValue(t));
+        const v = safeNum(t.ElementValue?.[0]?.[valueKey]);
         if (v == null) continue;
         days.get(dk)[listName].push(v);
       }
     }
 
-    collect(maxTEl, "maxList");
-    collect(minTEl, "minList");
-    collect(popEl, "popList");
-    collect(wsEl, "wsList");
+    collect(maxTEl, "maxList", "MaxTemperature");
+    collect(minTEl, "minList", "MinTemperature");
+    collect(popEl,  "popList", "ProbabilityOfPrecipitation");
+    collect(wsEl,   "wsList",  "WindSpeed"); // :contentReference[oaicite:3]{index=3}
 
     // 取前 7 天
     const sortedDays = Array.from(days.entries())
@@ -276,7 +281,7 @@ export async function getForecastRenderData(city) {
       .slice(0, 7)
       .map(([, v]) => v);
 
-    // 組成 renderData
+    // 組成 renderData（✅符合你指定格式）
     const renderData = {};
     for (const d of sortedDays) {
       const wxText = mode(d.wxList) ?? d.wxList.find(Boolean) ?? "";
@@ -284,11 +289,10 @@ export async function getForecastRenderData(city) {
 
       const maxT = d.maxList.length ? Math.max(...d.maxList) : null;
       const minT = d.minList.length ? Math.min(...d.minList) : null;
-      const pop = d.popList.length ? Math.max(...d.popList) : null;
-      const ws =
-        d.wsList.length
-          ? Math.round((d.wsList.reduce((s, x) => s + x, 0) / d.wsList.length) * 10) / 10
-          : null;
+      const pop  = d.popList.length ? Math.max(...d.popList) : null;
+      const ws   = d.wsList.length
+        ? Math.round((d.wsList.reduce((s, x) => s + x, 0) / d.wsList.length) * 10) / 10
+        : null;
 
       renderData[d.weekday] = [
         d.md,
@@ -347,50 +351,74 @@ async function getNowTempByCity(city) {
 // ==============================
 // card 1 主函式
 // ==============================
-export async function getCard1RenderData({ city }) {
+export async function getCard1RenderData(city) {
   try {
-    // 1️⃣ 抓逐時預報（F-D0047-089）
     const raw = await fetchCWA("F-D0047-089", { locationName: city });
+
+    // ✅ 正確路徑（注意大小寫）
     const loc =
-      raw?.records?.locations?.[0]?.location?.[0] ??
-      raw?.records?.location?.[0];
+      raw?.records?.Locations?.[0]?.Location?.find(l => l.LocationName === city);
 
-    const we = loc?.weatherElement ?? [];
-    const tEl = findEl(we, "T");   // 溫度
-    const wxEl = findEl(we, "Wx"); // 天氣現象（有就用，沒有也 OK）
+    if (!loc) throw new Error("location not found");
 
-    if (!tEl?.time?.length) throw new Error("no temperature data");
+    const we = loc.WeatherElement ?? [];
 
-    // 2️⃣ N 對齊整點
+    // ✅ 089 使用中文 ElementName
+    const tEl = we.find(e => e.ElementName === "溫度");
+    const wxEl = we.find(e => e.ElementName === "天氣現象");
+
+    if (!tEl?.Time?.length) throw new Error("no temperature data");
+
+    // 對齊整點
     const base = new Date();
     base.setMinutes(0, 0, 0);
 
     const renderData = {};
     let nowTempFromForecast = null;
 
-    // 3️⃣ N ~ N+5
+    // 取 DataTime 或 StartTime
+    const getTimeMs = (t) =>
+      new Date(t.DataTime ?? t.StartTime).getTime();
+
+    const pickBestPoint089 = (arr, targetMs) => {
+      let best = null;
+      let bestMs = Infinity;
+      for (const t of arr ?? []) {
+        const ms = getTimeMs(t);
+        if (ms >= targetMs && ms < bestMs) {
+          bestMs = ms;
+          best = t;
+        }
+      }
+      return best;
+    };
+
     for (let i = 0; i <= 5; i++) {
       const target = new Date(base.getTime() + i * 60 * 60 * 1000);
       const targetMs = target.getTime();
 
-      const tPoint = pickBestPoint(tEl.time, targetMs);
-      const wxPoint = wxEl ? pickBestPoint(wxEl.time, targetMs) : null;
+      const tPoint = pickBestPoint089(tEl.Time, targetMs);
+      const wxPoint = wxEl ? pickBestPoint089(wxEl.Time, targetMs) : null;
 
-      const temp = safeNum(firstVal(tPoint));
-      const wxText = wxPoint ? firstVal(wxPoint) : "";
+      const temp = safeNum(
+        tPoint?.ElementValue?.[0]?.Temperature
+      );
+
+      const wxText =
+        wxPoint?.ElementValue?.[0]?.Weather ?? "";
+
       const icon = wxToIcon(wxText);
 
-      const key =
-        i === 0
-          ? "now"
-          : String(target.getHours()).padStart(2, "0");
+      const key = i === 0
+        ? "now"
+        : String(target.getHours()).padStart(2, "0");
 
-      renderData[key] = [icon, temp !== null ? String(temp) : "--"];
+      renderData[key] = [icon, temp != null ? String(temp) : "--"];
 
       if (i === 0) nowTempFromForecast = temp;
     }
 
-    // 4️⃣ 特例：23 點後 now 沒預報 → 用 10 分鐘觀測補 now
+    // 23 點後補 10 分鐘觀測
     if (nowTempFromForecast === null) {
       const obsTemp = await getNowTempByCity(city);
       if (obsTemp !== null) {
@@ -401,6 +429,7 @@ export async function getCard1RenderData({ city }) {
 
     return ok(renderData);
   } catch (err) {
+    console.error("card1 error:", err);
     return fail();
   }
 }
@@ -410,7 +439,7 @@ export async function getCard1RenderData({ city }) {
 // 10 分鐘觀測（O-A0003-001）
 // 回傳原始 weather 字串（不轉 icon）
 // ==============================
-export async function getNow10MinRenderData({ city }) {
+export async function getNow10MinRenderData(city) {
   try {
     // 1️⃣ 由縣市找到代表觀測站
     const stationId = CITY_TO_STATION[city];
