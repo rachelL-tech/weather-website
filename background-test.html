@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/tsparticles.all.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.1.0/tsparticles.bundle.min.js" defer></script>
+    <script src="/src/thunder.js" defer></script>
     <script src="/src/effects.js" defer></script>
     <link rel="stylesheet" href="effect.css" />
     <title>背景測試</title>
 </head>
 <body>
-    <div id="tsparticles"></div>
-    <div id="sunny-flare"></div>
+    <div id="bg-color-layer"></div>
+    <div id="sunny-flare" style="display: none;"></div>
+    <div class="thunder-effect" style="display: none;">
+        <canvas id="lightning-canvas"></canvas>
+    </div>
+    <div class="tsparticles" id="tsparticles-rain"></div>
+    <div class="tsparticles" id="tsparticles-clouds"></div>
+    <div class="tsparticles" id="tsparticles-stars"></div>
 </body>
 </html>

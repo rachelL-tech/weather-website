@@ -1,4 +1,23 @@
 /* 透明背景效果範例 */
+:root {
+    --sunny__day1: #4facfe;
+    --sunny__day2: #00f2fe; 
+    /* sunny 混合模式 normal */
+    --cloudy__night1: #0f2027;
+    --cloudy__night2: #2c5364;
+    /* 混合模式screen */
+    --rainy1: #3d3d3d;
+    --rainy2: #242424;
+    /* 混合模式 multiply */
+
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 .card {
     background: transparent;
     backdrop-filter: blur(10px);
@@ -6,10 +25,11 @@
 
 body {
     height: 100dvh;
-
+    background-color: #242424;
 }
 
-#tsparticles {
+/* 粒子特效層 */
+.tsparticles {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,33 +42,10 @@ body {
     background-position: center; */
 }
 
-/* 定義呼吸動畫：微妙的縮放和透明度變化 */
-@keyframes pulse-glow {
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 0.8;
-        /* 初始透明度 */
-    }
-    50% {
-        transform: scale(2);
-        /* 稍微放大一點點 */
-        opacity: 1;
-        /* 稍微變亮 */
-    }
-}
 
-/* 定義旋轉動畫：極其緩慢的 360 度旋轉 */
-@keyframes slow-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
+/* 太陽光圈的 CSS */
 #sunny-flare {
+    display: none;
     position: fixed;
     z-index: -1;
     top: -350px;
@@ -57,24 +54,90 @@ body {
     height: 800px;
     background: radial-gradient(circle,
             rgb(247, 247, 247) 0%,
+            rgb(247, 247, 247) 10%,
             rgba(247, 247, 247, 0.751) 15%,
             transparent 45%,
-            rgba(255, 0, 0, 0.8) 50%,
-            rgba(255, 255, 0, 0.8) 53%,
-            rgba(15, 245, 34, 0.5) 55%,
-            rgba(0, 255, 255, 0.8) 58%,
-            rgba(247, 247, 247, 0.8) 60%,
-            rgb(247, 247, 247) 60%,
-            transparent 70%);
+            rgba(255, 0, 0, 0.4) 60%,
+            rgba(255, 255, 0, 0.4) 61%,
+            rgba(15, 245, 34, 0.4) 62%,
+            rgba(0, 255, 255, 0.4) 63%,
+            rgba(247, 247, 247, 0.8) 67%,
+            rgb(247, 247, 247) 70%,
+            transparent 75%);
     filter: blur(40px);
-    mix-blend-mode: screen;
+    /* mix-blend-mode: screen; */
     z-index: 0;
     pointer-events: none;
     /* 應用動畫 */
-    /* pulse-glow: 8秒完成一次呼吸，無限循環，平滑變速 */
-    /* slow-spin: 60秒完成一次旋轉，無限循環，線性等速 */
-    animation: pulse-glow 3s ease-in-out infinite, slow-spin 60s linear infinite;
+    animation: pulse-glow 6s ease-in-out infinite;
 
     /* 確保旋轉和縮放的中心點在光圈中心 */
     transform-origin: center center;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+        /* 初始透明度 */
+    }
+
+    50% {
+        transform: scale(1.2);
+        /* 稍微放大一點點 */
+        opacity: 0.9;
+        /* 稍微變亮 */
+        /* 1. saturate: 讓彩虹色更鮮豔
+        2. contrast: 讓亮的中心更亮，暗的邊緣更乾淨
+        3. drop-shadow: 創造一層額外的白色光暈，這比亮度濾鏡更像真實的光
+        */
+        filter: blur(40px) saturate(1.8) contrast(1.2) drop-shadow(0 0 25px rgba(255, 255, 255, 0.5));
+    }
+}
+
+/* 閃電的 CSS */
+.thunder-effect{ 
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -3;
+    pointer-events: none;
+}
+
+
+#lightning-canvas {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+#bg-color-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    /* 確保在所有圖層的最底層 */
+    transition: background 1.5s ease;
+    /* 緩慢變色的關鍵 */
+}
+
+/* 晴天：亮藍色漸層 */
+.state-sunny {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* 陰天：沈穩的灰色漸層 */
+.state-cloudy {
+    background: linear-gradient(135deg, #3d3d3d 0%, #242424 100%);
+}
+
+/* 晚上：深邃的夜空藍 */
+.state-night {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
 }

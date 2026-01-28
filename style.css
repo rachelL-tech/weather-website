@@ -86,7 +86,6 @@ body {
   color: var(--text-strong);
   background: var(--pill);
 }
-<<<<<<< HEAD
 
 .title-block {
   position: relative;
@@ -387,5 +386,3 @@ body {
     justify-content: flex-start;
   }
 }
-=======
->>>>>>> upstream/develop
