@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-/* 透明背景效果範例 */
-.card {
-    background: transparent;
-    backdrop-filter: blur(10px);
-}
-=======
 :root {
   color-scheme: dark;
   --bg: #0d1414;
@@ -39,8 +32,6 @@ body {
   position: relative;
   min-height: 100vh;
   padding: 32px 0 48px;
-  background-image: url('https://images.unsplash.com/photo-1607516631419-3a32c7a61081?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Njk0MzM1NTR8&ixlib=rb-4.1.0&q=80&w=1080');
-  background-size: cover;
   background-position: center;
   color: var(--text-strong);
 }
@@ -388,4 +379,3 @@ body {
     justify-content: flex-start;
   }
 }
->>>>>>> develop

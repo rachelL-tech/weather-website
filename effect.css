@@ -1,0 +1,80 @@
+/* 透明背景效果範例 */
+.card {
+    background: transparent;
+    backdrop-filter: blur(10px);
+}
+
+body {
+    height: 100dvh;
+
+}
+
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    /* 確保它在文字後面 */
+    /* background-image: url('/design/background/rainy.gif'); */
+    /* background-size: cover;
+    background-position: center; */
+}
+
+/* 定義呼吸動畫：微妙的縮放和透明度變化 */
+@keyframes pulse-glow {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+        /* 初始透明度 */
+    }
+    50% {
+        transform: scale(2);
+        /* 稍微放大一點點 */
+        opacity: 1;
+        /* 稍微變亮 */
+    }
+}
+
+/* 定義旋轉動畫：極其緩慢的 360 度旋轉 */
+@keyframes slow-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#sunny-flare {
+    position: fixed;
+    z-index: -1;
+    top: -350px;
+    left: -350px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle,
+            rgb(247, 247, 247) 0%,
+            rgba(247, 247, 247, 0.751) 15%,
+            transparent 45%,
+            rgba(255, 0, 0, 0.8) 50%,
+            rgba(255, 255, 0, 0.8) 53%,
+            rgba(15, 245, 34, 0.5) 55%,
+            rgba(0, 255, 255, 0.8) 58%,
+            rgba(247, 247, 247, 0.8) 60%,
+            rgb(247, 247, 247) 60%,
+            transparent 70%);
+    filter: blur(40px);
+    mix-blend-mode: screen;
+    z-index: 0;
+    pointer-events: none;
+    /* 應用動畫 */
+    /* pulse-glow: 8秒完成一次呼吸，無限循環，平滑變速 */
+    /* slow-spin: 60秒完成一次旋轉，無限循環，線性等速 */
+    animation: pulse-glow 3s ease-in-out infinite, slow-spin 60s linear infinite;
+
+    /* 確保旋轉和縮放的中心點在光圈中心 */
+    transform-origin: center center;
+}
