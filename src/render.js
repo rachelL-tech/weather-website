@@ -73,6 +73,7 @@ export function renderDailySummary(data) {
   document.getElementById('c2-rain').textContent = chanceOfRain + '%';
   //
   const currentWeatherText = document.querySelector('.current-weather__text');
+  console.log(data.renderData.weather)
   currentWeatherText.textContent = data.renderData.weather
 
   // CSS 樣式控制
