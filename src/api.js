@@ -278,7 +278,7 @@ export async function getForecastRenderData(city) {
       .slice(0, 7)
       .map(([, v]) => v);
 
-    // 組成 renderData（✅符合你指定格式）
+    // 組成 renderData
     const renderData = {};
     for (const d of sortedDays) {
       const wxText = mode(d.wxList) ?? d.wxList.find(Boolean) ?? "";
