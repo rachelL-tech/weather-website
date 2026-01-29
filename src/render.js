@@ -182,5 +182,5 @@ export function renderCurrentWeather(data){
   const weatherText = data.UIData?.Weather;
   console.log(weatherText)
 
-  changeBackground(weatherText);
+  WeatherManager.update(weatherText);
 }

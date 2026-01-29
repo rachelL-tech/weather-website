@@ -26,12 +26,13 @@ async function toggleParticles(id, options, show) {
             id: id,
             options: options
         });
-        console.log(`${id} 已啟動`);
+        // console.log(`${id} 已啟動`);
     } else {
         // 如果要關閉，且目前「正在跑」，就摧毀它
         if (currentContainer) {
             currentContainer.destroy(); // 徹底銷毀並清空畫布
-            console.log(`${id} 已關閉`);}
+            // console.log(`${id} 已關閉`)
+        }
     }
 }
 
@@ -280,13 +281,6 @@ const WeatherManager = {
     }
 };
 
-// // 在頁面載入後顯示目前是白天還是晚上
-// function updateTimeDisplay() {
-//     const status = document.getElementById("time-status");
-//     if (status) {
-//         status.innerText = isDayTime() ? "🌞 白天 (18:00前)" : "🌙 晚上 (18:00後)";
-//     }
-// }
 
 // 預設模式：晴
 function initDefalueBackground(Wx){

@@ -14,14 +14,26 @@
     <script type="module" src="./src/main.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/tsparticles.all.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.1.0/tsparticles.bundle.min.js" defer></script>
+    <script src="/src/thunder.js" defer></script>
     <script src="/src/effects.js" defer></script>
     <script src="/src/location.js" defer></script>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="weather-icons.css">
     <link rel="stylesheet" href="location.css">
+    <link rel="stylesheet" href="effect.css" />
   </head>
   <body>
-    <div id="tsparticles"></div> <!--背景特效-->
+    <!--背景特效元素區-->
+    <div id="bg-color-layer"></div>
+    <div id="sunny-flare" style="display: none;"></div>
+    <div class="thunder-effect" style="display: none;">
+      <canvas id="lightning-canvas"></canvas>
+    </div>
+    <div class="tsparticles" id="tsparticles-rain"></div>
+    <div class="tsparticles" id="tsparticles-stars"></div>
+    <div class="tsparticles" id="tsparticles-clouds"></div>
+    <!--背景特效元素到此結束-->
+
     <div class="screen">
 
       <header class="nav-bar">
