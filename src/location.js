@@ -69,17 +69,39 @@ export function initLocationDropdown() {
 }
 
 // focus button fuction to get realtime nearest weather data
-// export function setupGeoButton({
-//   buttonSelector = ".location_container .focus",
-//   onSuccess,
-// } = {}) {
-//   const btn = document.querySelector(buttonSelector);
-//   if (!btn) return;
+// 按鈕被點到 → 取得定位
+export function setupGeoButton({
+  buttonSelector = ".location_container .focus",
+  onSuccess,
+} = {}) {
+  const btn = document.querySelector(buttonSelector);
+  if (!btn) return;
 
-//   btn.addEventListener("click", () => {
-//     navigator.geolocation.getCurrentPosition((pos) => {
-//       const { latitude, longitude } = pos.coords;
-//       onSuccess?.({ lat: latitude, lon: longitude });
-//     });
-//   });
-// }
+  btn.addEventListener("click", () => {
+    // 呼叫瀏覽器定位 API，成功後會把「位置物件」丟進 callback 參數 pos
+    navigator.geolocation.getCurrentPosition((pos) => {
+    // 從 pos.coords 解構出緯度經度兩個欄位
+      const { latitude, longitude } = pos.coords;
+      onSuccess({ lat: latitude, lon: longitude });
+    });
+  });
+}
+
+export function findNearestStation(user, stations) {
+  // stations: [{ lat, lon, ... }, ...]
+  let best = null;
+  let bestD2 = Infinity;
+
+  // console.log(stations);
+  for (const st of stations) {
+    const dLat = st.lat - user.lat;
+    const dLon = st.lon - user.lon;
+    const d2 = dLat * dLat + dLon * dLon; // 先用平方距離做最近比較
+
+    if (d2 < bestD2) {
+      bestD2 = d2;
+      best = st;
+    }
+  }
+  return best;
+}

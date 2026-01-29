@@ -492,7 +492,7 @@ function getWGS84(geo) {
   };
 }
 
-export async function get10MinLatLonCountyTemp() {
+export async function get10MinLatLonCounty() {
   try {
     const raw = await fetchCWA("O-A0003-001");
     const stations = raw?.records?.Station ?? [];
@@ -500,28 +500,34 @@ export async function get10MinLatLonCountyTemp() {
     const data = stations
       .map(st => {
         const stationName = st?.StationName;
+        const stationId = st?.StationId;
         const geo = st?.GeoInfo ?? {};
         const { lat, lon } = getWGS84(geo);
 
         const county = geo?.CountyName ?? "";
         const T = safeNumObs(st?.WeatherElement?.AirTemperature);
+        const Weather = st.WeatherElement.Weather;
+        const RelativeHumidity = st.WeatherElement.RelativeHumidity;
+        const UVIndex = st.WeatherElement.UVIndex;
+
 
         if (lat == null || lon == null) return null;
 
         return {
           stationName,
+          stationId,
           lat,
           lon,
           county,
-          T: T != null ? String(Math.round(T)) : "--"
+          T: T != null ? String(Math.round(T)) : "--",
+          Weather,
+          RelativeHumidity,
+          UVIndex
         };
       })
       .filter(Boolean);
 
-    return {
-      ok: true,
-      renderData: data
-    };
+    return data;
   } catch (e) {
     return {
       ok: false,
