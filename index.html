@@ -26,7 +26,7 @@
 
       <header class="nav-bar">
         <nav class="nav-bar__menu">
-          <button id="homePageBtn" type="button"class="nav-bar__btn btn">首頁</button>
+          <button id="homePageBtn" type="button"class="nav-bar__btn nav-bar__btn--active btn">首頁</button>
           <button id="forecastPageBtn" type="button"class="nav-bar__btn btn">天氣預報</button>
         </nav>
       </header>
@@ -36,7 +36,7 @@
         <section class="dashboard__overview">
 
           <div class="current-weather">
-            <div class="current-weather__temp">23°C</div>
+            <div class="current-weather__temp">載入中...</div>
           </div>
           
           <div class="location_container">
@@ -76,33 +76,33 @@
           </article>
 
           <article class="card">
-            <div class="card__title">今日、明日氣象摘要</div>
-              <div id ="c2-error" class="card__error">123</div>
+            <div class="card__title value-text">今日、明日氣象摘要</div>
+              <div id ="c2-error" class="card__error is-hidden">123</div>
 
               <div id ="c2-row" class="temp-bar">
                 
-                <div id ="c2-min" class="temp-bar__min">--°C</div>
+                <div id ="c2-min" class="temp-bar__min value-text">載入中...</div>
                 <div class="temp-bar__track">
                   <div id ="c2-bar" class="temp-bar__range"></div>
                 </div>
-                <div id="c2-max" class="temp-bar__max">--°C</div>
+                <div id="c2-max" class="temp-bar__max value-text">載入中...</div>
               </div>
 
             <div id="c2-highlights" class="info-grid">
 
               <div class="info-grid__item">
-                <div class="info-grid__label">天氣</div>
-                <div id="c2-weather" class="info-grid__value">--</div>
+                <div class="info-grid__label label-text">天氣</div>
+                <div id="c2-weather" class="info-grid__value value-text">載入中...</div>
               </div>
 
               <div class="info-grid__item">
-                <div class="info-grid__label">舒適度</div>
-                <div id="c2-comfort" class="info-grid__value">--</div>
+                <div class="info-grid__label label-text">舒適度</div>
+                <div id="c2-comfort" class="info-grid__value value-text">載入中...</div>
               </div>
 
-              <div class="info-grid__item">
+              <div class="info-grid__item label-text">
                 <div class="info-grid__label">降雨機率</div>
-                <div id="c2-rain" class="info-grid__value">--%</div>
+                <div id="c2-rain" class="info-grid__value value-text">載入中...</div>
               </div>
 
             </div>

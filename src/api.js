@@ -233,7 +233,7 @@ export async function getForecastRenderData(city = "臺北市") {
     const wxEl = we.find((e) => e.ElementName === "天氣現象");
     const maxTEl = we.find((e) => e.ElementName === "最高溫度");
     const minTEl = we.find((e) => e.ElementName === "最低溫度");
-    const popEl = we.find((e) => e.ElementName === "降雨機率");
+    const popEl = we.find((e) => e.ElementName === "12小時降雨機率" || e.ElementName === "降雨機率");
     const wsEl  = we.find((e) => e.ElementName === "風速"); // WindSpeed :contentReference[oaicite:2]{index=2}
 
     if (!wxEl?.Time?.length) throw new Error("Wx missing");
@@ -377,7 +377,7 @@ export async function getCard1RenderData(city = "臺北市") {
     const base = new Date();
     base.setMinutes(0, 0, 0);
 
-    const renderData = {};
+    const renderData = [];
     let nowTempFromForecast = null;
 
     // 取 DataTime 或 StartTime
@@ -413,11 +413,17 @@ export async function getCard1RenderData(city = "臺北市") {
 
       const icon = wxToIcon(wxText);
 
-      const key = i === 0
+      const timeStr = i === 0
         ? "now"
         : String(target.getHours()).padStart(2, "0");
 
-      renderData[key] = [icon, temp != null ? String(temp) : "--"];
+      renderData.push({
+      time: timeStr,
+      icon: icon,
+      temp: temp != null ? String(temp) : "--"
+      }); 
+
+      // renderData[key] = [icon, temp != null ? String(temp) : "--"];
 
       if (i === 0) nowTempFromForecast = temp;
     }
@@ -426,8 +432,9 @@ export async function getCard1RenderData(city = "臺北市") {
     if (nowTempFromForecast === null) {
       const obsTemp = await getNowTempByCity(city);
       if (obsTemp !== null) {
-        const keepIcon = renderData.now?.[0] ?? "Cloudy";
-        renderData.now = [keepIcon, String(obsTemp)];
+        if (renderData.length > 0) {
+          renderData[0].temp = String(obsTemp);
+        }
       }
     }
 
@@ -464,7 +471,7 @@ export async function getNow10MinRenderData(city = "臺北市") {
         T: T != null ? String(Math.round(T)) : "--"
       },
       UIData: {
-        weather: weatherText
+        Weather: weatherText
       }
     };
   } catch (err) {
