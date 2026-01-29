@@ -33,6 +33,11 @@ async function renderData(city = "臺北市") {
 
   const forecast_Data = await getForecastRenderData(city);
   renderForecast(forecast_Data);
+  // 如果是在預測頁面，另外渲染背景
+  if (document.querySelector(".screen.forecast")){
+    console.log("目前背景天氣", CurrentWeather_Data.UIData?.Weather)
+    WeatherManager.update(CurrentWeather_Data.UIData?.Weather);
+  }
 }
 
 function init() {

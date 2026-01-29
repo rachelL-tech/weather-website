@@ -180,18 +180,10 @@ export function renderCurrentWeather(data){
   tempEL.textContent = `${temp}°C`
 
   const weatherText = data.UIData?.Weather;
-  console.log(weatherText)
+  console.log("目前背景天氣", weatherText)
 
+  //在這邊切換背景
   WeatherManager.update(weatherText);
-
-  const testData = {
-    StationName: "基隆",
-    Weather: "陰有雨",
-    AirTemperature: 15.5,
-    RelativeHumidity: 83,
-    UVIndex: 0,
-  }
-  renderLocationPopup(testData)
 }
 
 // renderLocationPopup
