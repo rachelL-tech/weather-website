@@ -69,9 +69,12 @@
 }
 
 .label-text {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.4));
 }
 
+.screen.forecast {
+  padding-bottom: 40px;
+}
 
 @media (max-width: 950px) {
   .title-block {

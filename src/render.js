@@ -71,6 +71,9 @@ export function renderDailySummary(data) {
   document.getElementById('c2-weather').textContent = weather;
   document.getElementById('c2-comfort').textContent = comfortIndex;
   document.getElementById('c2-rain').textContent = chanceOfRain + '%';
+  //
+  const currentWeatherText = document.querySelector('.current-weather__text');
+  currentWeatherText.textContent = data.renderData.weather
 
   // CSS 樣式控制
   const barEl = document.getElementById('c2-bar');

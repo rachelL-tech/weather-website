@@ -90,13 +90,7 @@ body {
 
     60% {
         transform: scale(1.2);
-        /* 稍微放大一點點 */
         opacity: 0.9;
-        /* 稍微變亮 */
-        /* 1. saturate: 讓彩虹色更鮮豔
-        2. contrast: 讓亮的中心更亮，暗的邊緣更乾淨
-        3. drop-shadow: 創造一層額外的白色光暈，這比亮度濾鏡更像真實的光
-        */
         filter: blur(40px) saturate(1.8) contrast(1.2) drop-shadow(0 0 25px rgba(255, 255, 255, 0.5));
     }
 }
@@ -149,8 +143,9 @@ body {
 /*! 做給瑞秋的popover */
 
 .location-popup__container {
-    /* 用 anchor定位 user-profile 按鈕 */
+    /* 用 anchor定位 focus 按鈕 */
     inset: unset;
+    position: absolute;
     top: anchor(bottom);
     left: anchor(center);
     transform: translateX(-50%);
@@ -166,6 +161,17 @@ body {
     color: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
+
+@media (max-width:600px) {
+    .location-popup__container {
+        top: anchor(bottom);
+        right: anchor(right);
+        left: unset;
+        transform: unset;
+    }
+}
+
+
 
 .location-popup__container h4 {
     margin-bottom: 10px;
