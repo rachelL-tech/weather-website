@@ -12,7 +12,7 @@
 .dashboard__overview {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
 }
 
 .current-weather {
@@ -26,6 +26,11 @@
   font-weight: 400;
   color: var(--text-main);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)); 
+}
+
+.current-weather__text {
+  font-size: 24px;
+  padding-left: 24px;
 }
 
 .current-weather__icon {
