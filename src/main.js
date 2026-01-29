@@ -8,7 +8,7 @@ const homePageBtn = document.getElementById('homePageBtn');
 const forecastPageBtn = document.getElementById('forecastPageBtn');
 
 function goTo(page) {
-  const url = new URL(page, window.location.origin);
+  const url = new URL(page, window.location.href);
   url.searchParams.set("city", window.city);
   window.location.href = url.toString();
 }
