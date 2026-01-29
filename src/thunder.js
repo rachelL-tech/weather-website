@@ -64,7 +64,7 @@ function initLightning(canvas) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // 隨機機率觸發閃電 (約 1% 的機率)
-        if (Math.random() < 0.01) {
+        if (Math.random() < 0.02) {
             drawStrike();
         }
 

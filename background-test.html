@@ -8,6 +8,7 @@
     <script src="/src/thunder.js" defer></script>
     <script src="/src/effects-demo.js" defer></script>
     <link rel="stylesheet" href="effect.css" />
+    <link rel="stylesheet" href="simulator.css" />
     <title>背景測試</title>
 </head>
 <body>
@@ -22,6 +23,8 @@
     <!-- 測試用的按鈕 -->
     <div id="dev-weather-console">
         <h4>天氣模擬器 🌦️</h4>
+        <button id="mode-switch" onclick="handleDayNightToggle()">🌞 / 🌙 切換晝夜模式</button>
+        <hr>
         <div class="btn-group">
             <button onclick="WeatherManager.update('晴')">純晴天</button>
             <button onclick="WeatherManager.update('多雲')">多雲</button>

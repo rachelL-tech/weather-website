@@ -196,16 +196,58 @@ const particlesOptions = {
     }
 }
 
-//! 白天晚上判斷
-function isDayTime(){
-    const now = new Date()
-    const hour = now.getHours()
-    // 假設18:00以後就是晚上
-    if (hour > 5 && hour < 18){
-        return true
-    }
-    return false //TODO 可以更動這個函式的回傳直來測試 白天/夜間 模式
-};
+// //! 白天晚上判斷
+// function isDayTime(){
+//     const now = new Date()
+//     const hour = now.getHours()
+//     // 假設18:00以後就是晚上
+//     if (hour > 5 && hour < 18){
+//         return true
+//     }
+//     return false //TODO 可以更動這個函式的回傳直來測試 白天/夜間 模式
+// };
+
+//! 晝夜切換器
+/**
+ * 使用立即執行函式 (IIFE) 建立一個私有作用域
+ * 這樣 isDay 變數就不會被全域污染
+ */
+const DayNightController = (() => {
+    let isDay = true; // 預設為白天
+
+    return {
+        // 獲取目前狀態
+        getState: () => isDay,
+        // 切換狀態
+        toggle: () => {
+            isDay = !isDay;
+            console.log(`系統切換至: ${isDay ? "白天" : "夜晚"}`);
+            return isDay;
+        }
+    };
+})();
+
+// --- 保持原本的函式名稱，讓 WeatherManager 不必修改 ---
+function isDayTime() {
+    return DayNightController.getState();
+}
+
+/**
+ * 模擬器按鈕專用的切換函式
+ */
+function handleDayNightToggle() {
+    // 1. 切換內部狀態
+    DayNightController.toggle();
+    
+    // 2. 更新畫面上的文字提示
+    updateTimeDisplay();
+    
+    // 3. 關鍵：切換後要手動觸發一次更新，否則畫布不會即時變換
+    // 我們可以抓取目前的輸入值，或是簡單用「晴」來測試
+    WeatherManager.update("晴"); 
+}
+
+
 
 
 // 天氣特效控制中心(總開關)

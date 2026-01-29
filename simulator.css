@@ -1,0 +1,55 @@
+/*! 按鈕控制台的 CSS */
+#dev-weather-console {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+#dev-weather-console h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+#dev-weather-console button {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+#dev-weather-console button:hover {
+    background: white;
+    color: #333;
+}
+
+#dev-weather-console button:last-child {
+    margin-bottom: 8px;
+}
+
+#mode-switch {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#dev-weather-console hr {
+    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.662);
+}
