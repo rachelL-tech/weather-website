@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <div class="screen">
+      <div class="overlay"></div>
+
+      <header class="top">
+        <div class="brand">weather.com</div>
+        <nav class="nav">
+          <span class="pill active">Home</span>
+          <span class="pill">Forecast</span>
+        </nav>
+      </header>
+
+      <main class="dashboard">
+        <section class="left">
+          <div class="temp-row">
+            <div class="temp">23°C</div>
+            <img class="temp-icon" src="icons/rainy.png" alt="Rainy" />
+          </div>
+
+          <div class="location">Taipei City</div>
+
+          <div class="location-panel">
+            <div class="location-search">Search location</div>
+            <div class="location-list">
+              <div class="location-item active">Watermelon Park</div>
+              <div class="location-item">Downtown</div>
+              <div class="location-item">Harbor</div>
+              <div class="location-item">Mountain</div>
+            </div>
+          </div>
+
+          <div class="time">10:43 | H:32°  L:18°</div>
+        </section>
+
+        <section class="right">
+          <article class="card">
+            <div class="card-title">Thunderstorms expected around 00:00</div>
+            <div class="divider"></div>
+            <div class="hourly">
+              <div class="hour">
+                <div class="hour-label">Now</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="hour-temp">23°C</div>
+              </div>
+              <div class="hour">
+                <div class="hour-label">00</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="hour-temp">21°C</div>
+              </div>
+              <div class="hour">
+                <div class="hour-label">01</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="hour-temp">20°C</div>
+              </div>
+              <div class="hour">
+                <div class="hour-label">02</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="hour-temp">20°C</div>
+              </div>
+              <div class="hour">
+                <div class="hour-label">03</div>
+                <img src="icons/wind.png" alt="Cloudy" />
+                <div class="hour-temp">23°C</div>
+              </div>
+              <div class="hour">
+                <div class="hour-label">04</div>
+                <img src="icons/wind.png" alt="Cloudy" />
+                <div class="hour-temp">23°C</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-title">5-Day Forecast</div>
+            <div class="divider"></div>
+            <div class="forecast-mini">
+              <div class="forecast-row">
+                <div class="day">Today</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="min">18°C</div>
+                <div class="bar">
+                  <div class="bar-fill" style="width: 150px"></div>
+                </div>
+                <div class="max">32°C</div>
+              </div>
+              <div class="forecast-row">
+                <div class="day">Thu</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="min">20°C</div>
+                <div class="bar">
+                  <div class="bar-fill" style="width: 130px"></div>
+                </div>
+                <div class="max">29°C</div>
+              </div>
+              <div class="forecast-row">
+                <div class="day">Fri</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="min">23°C</div>
+                <div class="bar">
+                  <div class="bar-fill" style="width: 120px"></div>
+                </div>
+                <div class="max">31°C</div>
+              </div>
+              <div class="forecast-row">
+                <div class="day">Sat</div>
+                <img src="icons/sun.png" alt="Sunny" />
+                <div class="min">22°C</div>
+                <div class="bar">
+                  <div class="bar-fill" style="width: 110px"></div>
+                </div>
+                <div class="max">29°C</div>
+              </div>
+              <div class="forecast-row">
+                <div class="day">Sun</div>
+                <img src="icons/rainy.png" alt="Rainy" />
+                <div class="min">23°C</div>
+                <div class="bar">
+                  <div class="bar-fill" style="width: 160px"></div>
+                </div>
+                <div class="max">33°C</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-title">Tomorrow Highlights</div>
+            <div class="divider"></div>
+            <div class="highlights">
+              <div class="highlight">
+                <div class="label">Weather</div>
+                <div class="value">Rainy</div>
+              </div>
+              <div class="highlight">
+                <div class="label">Relative Humidity</div>
+                <div class="value">84%</div>
+              </div>
+              <div class="highlight">
+                <div class="label">Comfort Index</div>
+                <div class="value">65%</div>
+              </div>
+              <div class="highlight">
+                <div class="label">Rain Chance</div>
+                <div class="value">70%</div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+.dashboard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard__overview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.current-weather {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.current-weather__temp {
+  font-size: 120px;
+  font-weight: 400;
+  color: var(--text-main);
+}
+
+.current-weather__icon {
+  width: 60px;
+  height: 50px;
+}
+
+.current-weather__location {
+  font-size: 44px;
+  color: var(--text-main);
+}
+
+.dashboard__details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  border-radius: 18px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(97, 97, 97, 0.2);
+  backdrop-filter: blur(25px);
+}
+
+.card__title {
+  margin: 0 0 20px 0;
+}
+
+.forecast-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-strong);
+}
+
+.hourly-forecast {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 22px;
+}
+
+.hourly-forecast__item {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+}
+
+.hourly-forecast__icon {
+  width: 28px;
+  height: 24px;
+}
+
+.temp-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin: 0 0 20px 0;
+  padding: 0 20px;
+}
+
+.temp-bar__track {
+  flex-grow: 1;
+  height: 6px;
+  background: var(--bar);
+  background: rgb(68, 68, 68);
+  border-radius: 6px;
+  position: relative;
+}
+
+.temp-bar__range {
+  height: 100%;
+  background: linear-gradient(to right, #7dd3fc, #fbbf24, #f87171);
+  border-radius: 6px;
+  position: absolute;
+  /* left: 0%; 
+  width: 0%; */
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.info-grid__item {
+  /* background: var(--panel); */
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(83, 83, 83, 0.75);
+  backdrop-filter: blur(25px);
+}
+
+
+
+@media (max-width: 1250px) {
+  .dashboard {
+  flex-direction: column;
+  gap: 12px;
+  }
+  .dashboard__details {
+  display: flex;
+  flex-direction: column;
+  margin: 24px auto;
+  }
+
+}
+
+@media (max-width: 650px) {
+  .card{
+    max-width: 360px;
+    margin: 0px;
+  }
+
+  .info-grid {
+  grid-template-columns: 1fr
+}
+
+.hourly-forecast {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+}
+}
