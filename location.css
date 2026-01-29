@@ -58,6 +58,17 @@
     transform: rotate(180deg);
 }
 
+/* Show dropdown on click */
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(5px);
+}
+
+.dropdown:hover .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
 /* Also show on focus for accessibility */
 .dropdown:focus-within .dropdown-menu {
     opacity: 1;
