@@ -499,7 +499,7 @@ export async function get10MinLatLonCounty() {
 
     const data = stations
       .map(st => {
-        const stationName = st?.StationName;
+        const StationName = st?.StationName;
         const stationId = st?.StationId;
         const geo = st?.GeoInfo ?? {};
         const { lat, lon } = getWGS84(geo);
@@ -514,15 +514,15 @@ export async function get10MinLatLonCounty() {
         if (lat == null || lon == null) return null;
 
         return {
-          stationName,
+          StationName,
           stationId,
           lat,
           lon,
           county,
-          T: T != null ? String(Math.round(T)) : "--",
+          AirTemperature: T != null ? String(Math.round(T)) : "--",
           Weather,
           RelativeHumidity,
-          UVIndex
+          UVIndex,
         };
       })
       .filter(Boolean);
