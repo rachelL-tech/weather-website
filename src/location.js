@@ -18,7 +18,7 @@ export function initLocationDropdown() {
         dropdown.classList.toggle("active");
         });
     }
-    
+
     // 點按鈕：開/關選單（看你 CSS 是否用 .active 控制）
     button.addEventListener("click", (e) => {
         e.preventDefault();

@@ -69,13 +69,6 @@
     transform: rotate(180deg);
 }
 
-/* Also show on focus for accessibility */
-.dropdown:focus-within .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(5px);
-}
-
 .dropdown-item {
     display: block;
     padding: 12px 20px;
@@ -142,5 +135,9 @@
 }
 
 .focus:hover {
-  transform: rotate(90deg) scale(1.2);
+  transform: scale(0.8);
+}
+
+.focus.is-open {
+  transform: rotate(90deg) scale(0.8);;
 }

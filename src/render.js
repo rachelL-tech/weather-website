@@ -121,6 +121,8 @@ export function renderForecast(data,selector = '.forecast-list'){
 
   let html = '';
 
+  forecastList.pop();
+
   forecastList.forEach(([weekday,values])=>{
 
     const dataStr = values[0];

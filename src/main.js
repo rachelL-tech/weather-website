@@ -8,7 +8,7 @@ const homePageBtn = document.getElementById('homePageBtn');
 const forecastPageBtn = document.getElementById('forecastPageBtn');
 
 function goTo(page) {
-  const url = new URL(page, window.location.origin);
+  const url = new URL(page, window.location.href);
   url.searchParams.set("city", window.city);
   window.location.href = url.toString();
 }
@@ -27,6 +27,20 @@ if (forecastPageBtn) {
 if (homePageBtn) {
   homePageBtn.addEventListener('click', () => {
     goTo("index.html");
+  });
+}
+
+function bindButtonSpin() {
+  // focus button popover toggle 時加 is-open ，讓他旋轉（寫在is-open）
+  const btn = document.querySelector("#location-popover__trigger");
+  const pop = document.querySelector("#location-popover");
+
+  if (!btn && !pop) return;
+
+  // Popover API：會在開/關時觸發 toggle event
+  pop.addEventListener("toggle", (e) => {
+    // e.newState: "open" | "closed"
+    btn.classList.toggle("is-open", e.newState === "open");
   });
 }
 
@@ -60,6 +74,8 @@ function init() {
   });
 
   initLocationDropdown();
+
+  bindButtonSpin();
   
   setupGeoButton({
       onSuccess: async ({ lat, lon }) => {
