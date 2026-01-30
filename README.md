@@ -1,37 +1,10 @@
-# weather-website
-## 1/27 映叡
--   完成初步UI設計，規劃Home頁面與Forcast頁面。背景預計放下雨動畫。
+# iWeather 即時天氣動態 
+## 概念發想
+參考 apple 內建的 weather app 「磨砂玻璃 (Glassmorphism)」、 dribbble 網站上的UI設計，透過中央氣象局 API 取得即時及未來天氣資訊，並渲染進
 
-**Home頁面**
+![ios weather app](https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/71/26/fa/7126fafa-a1b6-7e28-00ef-efe833157418/iPhone-Location-1320x2868.png/460x998bb.webp)
 
-![Home頁面](https://github.com/rachelL-tech/weather-website/blob/develop/design/website_png/Home.png)
+![](https://cdn.dribbble.com/userupload/3883602/file/original-cd199332bb9c727827b68ca1db5e49b7.jpg?resize=1504x1027&vertical=center)
+<a>https://dribbble.com/shots/19740043-Daily-UI-037-Weather</a>
 
-**Forcast頁面**
-
-![Forcast頁面](https://github.com/rachelL-tech/weather-website/blob/develop/design/website_png/Forecast.png)
-
--   新增.gitignore
-
-## 1/27 竣鵬
--   提交index.html, style.css 初版
-
-## 1/27 映叡
--   修改home頁面的card2 layout
-
-![Home頁面 card2](https://github.com/rachelL-tech/weather-website/blob/develop/design/website_png/card2-modified.png)
-
-## 1/27 佳弘
--   完成fetch資料的共用函式
-
-## 1/28 元鴻
--   完成雨天效果初步成果，並帶進index.html
-
-## 1/28 映叡
--   完成資料型態格式要求
-
-## 1/28 竣鵬
--   完成
-
-## 1/28 佳弘
-
-## 1/28 元鴻
+## 團隊分工
