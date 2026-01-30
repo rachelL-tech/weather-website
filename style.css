@@ -7,7 +7,7 @@
   --panel: #24302f;
   --text-main: #f2f6f5;
   --text-strong: #e6eceb;
-  --text-muted: #aeb8b7;
+  --text-muted: #d3dcdb;
   /* --text-muted: #9fb2b0; */
   --bar: #23302f;
   --bar-fill: #6fb7ff;
@@ -54,7 +54,8 @@ body {
 .label-text{
   font-size: 16px;
   color: var(--text-muted);
-  white-space: nowrap
+  white-space: nowrap;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
 }
 
 .value-text{

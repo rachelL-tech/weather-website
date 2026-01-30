@@ -333,9 +333,26 @@ function updateTimeDisplay() {
     }
 }
 
+// 雲朵圖片預載
+function preLoadCloudImg(){
+    const cloudUrls = [
+        "./design/background/cloud1.png", 
+        "./design/background/cloud2.png", 
+        "./design/background/cloud3.png"]
+    
+    cloudUrls.forEach(url =>{
+        image = new image()
+        image.src = url
+    })
+}
+
+
 // 初始執行一次
 function initSimulator(){
+    preLoadCloudImg()
     updateTimeDisplay();
     WeatherManager.update("晴") //預設晴天
 }
 initSimulator()
+
+

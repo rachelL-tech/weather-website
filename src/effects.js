@@ -281,9 +281,23 @@ const WeatherManager = {
     }
 };
 
+// 雲朵圖片預載
+function preLoadCloudImg(){
+    const cloudUrls = [
+        "./design/background/cloud1.png", 
+        "./design/background/cloud2.png", 
+        "./design/background/cloud3.png"]
+    
+    cloudUrls.forEach(url =>{
+        image = new image()
+        image.src = url
+    })
+}
+
 
 // 預設模式：晴
 function initDefalueBackground(Wx){
+    preLoadCloudImg()
     WeatherManager.update(Wx) 
 }
 initDefalueBackground("晴")//預設晴天
