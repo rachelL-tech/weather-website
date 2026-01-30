@@ -211,3 +211,65 @@ export function renderLocationPopup(data){
         <li>☀️ 紫外線指數｜${data.UVIndex}</li>
       </ul>`
 }
+
+export function renderFakeData(){
+  const CurrentWeatherData = {
+    renderData: {
+      T: 17,
+    },
+    UIData: {
+      Weather: "陰有雷雨"
+    }
+  }
+  renderCurrentWeather(CurrentWeatherData)
+
+  const HourlyForecastData = {
+    "ok": true,
+    "renderData": [{
+            "time": "now",
+            "icon": "Cloudy",
+            "temp": "22"
+        },
+        {
+            "time": "18",
+            "icon": "Sunny",
+            "temp": "22"
+        },
+        {
+            "time": "19",
+            "icon": "Rainy",
+            "temp": "21"
+        },
+        {
+            "time": "20",
+            "icon": "Rainy",
+            "temp": "20"
+        },
+        {
+            "time": "21",
+            "icon": "Thunder",
+            "temp": "20"
+        },
+        {
+            "time": "22",
+            "icon": "Thunder",
+            "temp": "20"
+        }
+    ]
+}
+  renderHourlyForecast(HourlyForecastData)
+
+  const dailySummaryData = {
+    "ok": true,
+    "renderData": {
+        "minT": "16",
+        "maxT": "22",
+        "barLeft": "40",
+        "barWidth": "40",
+        "weather": "陰有雷雨",
+        "comfortIndex": "稍有寒意至舒適",
+        "chanceOfRain": "80"
+    }
+}
+  renderDailySummary(dailySummaryData)
+}

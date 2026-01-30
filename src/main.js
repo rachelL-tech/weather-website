@@ -1,5 +1,5 @@
 // 引入渲染工具
-import { renderHourlyForecast, renderDailySummary,renderForecast,renderCurrentWeather, renderLocationPopup } from './render.js';
+import { renderHourlyForecast, renderDailySummary,renderForecast,renderCurrentWeather, renderLocationPopup, renderFakeData } from './render.js';
 import { getCard1RenderData, getCard2RenderData, getNow10MinRenderData,getForecastRenderData, get10MinLatLonCounty } from './api.js';
 import { initLocationDropdown, setupGeoButton, findNearestStation } from './location.js';
 
@@ -70,8 +70,14 @@ function init() {
   // 監聽使用者點擊選單
   document.addEventListener("citychange", async (e) => {
     const city = e.detail.city;
+    if (city === "比奇堡"){
+      renderFakeData()
+      return
+    }
     renderData(city);
   });
+
+
 
   initLocationDropdown();
 

@@ -289,7 +289,7 @@ function preLoadCloudImg(){
         "./design/background/cloud3.png"]
     
     cloudUrls.forEach(url =>{
-        image = new image()
+        const image = new Image()
         image.src = url
     })
 }
