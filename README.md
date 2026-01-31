@@ -3,7 +3,9 @@
 <a>https://rachell-tech.github.io/weather-website/index.html</a>
 
 **demo** 
-![螢幕錄影 2026-01-31 17 40 02](https://github.com/user-attachments/assets/a3c15139-6682-4650-9ec8-397f5edd7884)
+
+![iWeather Website](https://github.com/user-attachments/assets/9eada284-18f1-4ad4-93dc-dda4ab023bc1)
+![iWeather Website](https://youtu.be/cSlalXol9Vw?si=8Ls1AFWXjKYQx7Dk)
 
 ## 1. 概念發想
 參考 apple 內建的 weather app 「磨砂玻璃 (Glassmorphism)」、 dribbble 網站上的UI設計，透過中央氣象局 API 取得即時及未來天氣資訊，並渲染進卡片。
